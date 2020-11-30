@@ -45,6 +45,7 @@ variable lambda_memory {
 variable layer_arns {
     type = list(string)
     description = "List of ARNs of layers to include in the function runtime"
+    default = []
 }
 
 variable lambda_script_filename {
@@ -52,12 +53,8 @@ variable lambda_script_filename {
     description = "Source filename of the lambda to upload"
 }
 
-variable lambda_lifecycle {
-    type = map(map(string))
-    description = "Lifecycle settings"
-}
-
 variable environment_variables {
     type = map(string)
     description = "Environment variables"
+    default = {}
 }
