@@ -54,6 +54,9 @@ variable lambda_script_filename {
 }
 
 variable environment_variables {
-    description = "Environment variables"
-    default = null
+    description = "Environment block"
+    type = map(string)
+    default = {
+        "supersecretenvironmentvariable" = "thisisadefaultsetting"
+    }
 }
