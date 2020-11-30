@@ -1,3 +1,3 @@
-# Lambda Terraform Template
+# Terraform-Lambda
 
-This is a bunch of things all in a repo to let me quickly spin up an AWS Lambda function without having to reverse engineer a previous thing :D
+Quick module for spinning up a terraform and scheduling it to run periodically.
