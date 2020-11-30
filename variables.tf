@@ -54,7 +54,7 @@ variable lambda_script_filename {
 }
 
 variable environment_variables {
-    type = map(string)
+    type = map()
     description = "Environment variables"
     default = {}
 }
