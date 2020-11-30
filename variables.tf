@@ -55,5 +55,5 @@ variable lambda_script_filename {
 
 variable environment_variables {
     description = "Environment variables"
-    default = {}
+    default = null
 }
