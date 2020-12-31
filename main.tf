@@ -16,7 +16,7 @@ data archive_file lambda {
 # the lambda function itself
 resource aws_lambda_function this {
     function_name = var.function_name
-    handler = "${var.lambda_script_filename}.${var.lambda_handler}"
+    handler = var.lambda_handler
 
     runtime = var.lambda_runtime
     timeout = var.lambda_timeout # maximum is 900 seconds (15 minutes), default is 30
