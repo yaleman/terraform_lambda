@@ -44,7 +44,7 @@ resource aws_cloudwatch_log_group log_group {
 # role for the lambda to run under, to do the things.
 resource aws_iam_role lambda_role {
   name = "lambda_${var.function_name}"
-  assume_role_policy = file("iam_role_policy_lambda.json")
+  assume_role_policy = file("${path.module}/iam_role_policy_lambda.json")
 }
 
 # Give the role access to the basic Lambda role
