@@ -7,5 +7,5 @@ output role_arn {
 }
 
 output role_name {
-    value = aws_iam_role.lambda_role.arn
+    value = aws_iam_role.lambda_role.name
 }
