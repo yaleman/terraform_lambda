@@ -21,3 +21,7 @@ Variables
 | lambda_script_filename | string | The original filename on the filesystem of the function | |
 | lambda_script_additional_files | list(string) | Additional files to include in the package. | |
 | environment_variables | map(string) | A map of environment variables | By default, it'll set "supersecretenvironmentvariable" = "thisisadefaultsetting"|
+
+# Changelog
+
+1.0.4 - Compatibility with Terraform 0.13+
