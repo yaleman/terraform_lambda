@@ -15,7 +15,6 @@ provider aws {
   region  = var.aws_region
 }
 
-# this is really only needed if there's multiple files or it's huge
 data archive_file lambda {
   type        = "zip"
   output_path = "${var.function_name}.zip"
@@ -23,11 +22,12 @@ data archive_file lambda {
     content  = file(var.lambda_script_filename)
     filename = var.lambda_script_filename
   }
+
   dynamic source {
     for_each = { for filename in var.lambda_script_additional_files: filename => filename }
     content {
-      content  = file(var.filename)
-      filename = var.filename
+      content  = file(source.value)
+      filename = source.value
     }
   }
 }
