@@ -25,9 +25,16 @@ variable aws_profile {
     description = "The profile we will use to build and implement this"
 }
 
+variable lambda_run_on_schedule {
+    type = bool
+    default = true
+    description = "Set this to false if you don't want to schedule it"
+}
+
 variable lambda_schedule_expression {
     type = string
     description = "How often to run the lambda"
+    default = ""
 }
 
 variable lambda_timeout {
@@ -53,10 +60,16 @@ variable lambda_script_filename {
     description = "Source filename of the lambda to upload"
 }
 
+variable lambda_script_additional_files {
+    type = list(string)
+    description = "Additional script files to add to the package"
+}
+
 variable environment_variables {
     description = "Environment block"
     type = map(string)
-    default = {
-        "supersecretenvironmentvariable" = "thisisadefaultsetting"
-    }
+    #default = {
+    #    "supersecretenvironmentvariable" = "thisisadefaultsetting"
+    #}
+    default = {}
 }
