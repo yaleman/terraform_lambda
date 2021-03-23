@@ -24,10 +24,10 @@ data archive_file lambda {
     filename = var.lambda_script_filename
   }
   dynamic source {
-    for_each = var.lambda_script_additional_files
+    for_each = { for filename in var.lambda_script_additional_files: filename => filename }
     content {
-      content  = file(var.each)
-      filename = var.each
+      content  = file(var.filename)
+      filename = var.filename
     }
   }
 }
