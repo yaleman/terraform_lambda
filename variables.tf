@@ -63,6 +63,7 @@ variable lambda_script_filename {
 variable lambda_script_additional_files {
     type = list(string)
     description = "Additional script files to add to the package"
+    default = []
 }
 
 variable environment_variables {
