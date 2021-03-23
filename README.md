@@ -24,4 +24,4 @@ Variables
 
 # Changelog
 
-1.0.4 - Compatibility with Terraform 0.13+
+1.0.4 - Compatibility with Terraform 0.13+ 
