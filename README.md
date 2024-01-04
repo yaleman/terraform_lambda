@@ -4,7 +4,7 @@ Quick module for spinning up a terraform and scheduling it to run periodically.
 
 Due to limitations I couldn't figure out how to fix, if you don't set an environment variable it'll set a default one of `"supersecretenvironmentvariable" = "thisisadefaultsetting"`.
 
-Variables
+## Variables
 
 | Name | Type | Description | Notes |
 | ---  | --- | --- | --- |
@@ -22,6 +22,7 @@ Variables
 | lambda_script_additional_files | list(string) | Additional files to include in the package. | |
 | environment_variables | map(string) | A map of environment variables | By default, it'll set "supersecretenvironmentvariable" = "thisisadefaultsetting"|
 
-# Changelog
+## Changelog
 
-1.0.4 - Compatibility with Terraform 0.13+ 
+- 1.0.4 - Compatibility with Terraform 0.13+
+- 1.0.6 - AWS provider >5.10
