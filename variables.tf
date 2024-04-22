@@ -27,7 +27,7 @@ variable aws_profile {
 
 variable lambda_run_on_schedule {
     type = bool
-    default = true
+    default = false
     description = "Set this to false if you don't want to schedule it"
 }
 

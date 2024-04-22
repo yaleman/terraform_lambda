@@ -13,8 +13,8 @@ Due to limitations I couldn't figure out how to fix, if you don't set an environ
 | lambda_runtime | string | Python3.8 or whatever you want to run it in | |
 | aws_region | string | | |
 | aws_profile | string | | |
-| lambda_run_on_schedule | bool | Enable the schedule runner | |
-| lambda_schedule_expression | string | When to run it via EventBridge | https://docs.aws.amazon.com/eventbridge/latest/userguide/scheduled-events.html |
+| lambda_run_on_schedule | bool | Enable the schedule runner | Defaults to false |
+| lambda_schedule_expression | string | When to run it via EventBridge | <https://docs.aws.amazon.com/eventbridge/latest/userguide/scheduled-events.html> |
 | lambda_timeout | number | The maximum runtime in seconds | |
 | lambda_memory | number | The configured memory (in megabytes) the function's allowed to use | |
 | layer_arns | list(string) | A list of layer ARNs to include | |
