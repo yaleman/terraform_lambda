@@ -65,6 +65,11 @@ variable lambda_script_additional_files {
     description = "Additional script files to add to the package"
     default = []
 }
+variable log_retention_days {
+    type = string
+    description = "Number of days to keep the logs in cloudwatch"
+    default = 1
+}
 
 variable environment_variables {
     description = "Environment block"

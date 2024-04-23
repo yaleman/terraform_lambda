@@ -21,6 +21,7 @@ Due to limitations I couldn't figure out how to fix, if you don't set an environ
 | lambda_script_filename | string | The original filename on the filesystem of the function | |
 | lambda_script_additional_files | list(string) | Additional files to include in the package. | |
 | environment_variables | map(string) | A map of environment variables | By default, it'll set "supersecretenvironmentvariable" = "thisisadefaultsetting"|
+| log_retention_days | string | Number of days to keep the function logs | defaults to 1 |
 
 ## Changelog
 
