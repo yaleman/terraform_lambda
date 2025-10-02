@@ -10,12 +10,7 @@ terraform {
   }
 }
 
-provider aws {
-  profile = var.aws_profile
-  region  = var.aws_region
-}
-
-data archive_file lambda {
+data "archive_file" "lambda" {
   type        = "zip"
   output_path = "${var.function_name}.zip"
   source {
@@ -23,8 +18,8 @@ data archive_file lambda {
     filename = var.lambda_script_filename
   }
 
-  dynamic source {
-    for_each = { for filename in var.lambda_script_additional_files: filename => filename }
+  dynamic "source" {
+    for_each = { for filename in var.lambda_script_additional_files : filename => filename }
     content {
       content  = file(source.value)
       filename = source.value
@@ -33,7 +28,7 @@ data archive_file lambda {
 }
 
 # the lambda function itself
-resource aws_lambda_function this {
+resource "aws_lambda_function" "this" {
   function_name = var.function_name
   handler       = var.lambda_handler
 
@@ -55,38 +50,38 @@ resource aws_lambda_function this {
 }
 
 # it's a smart idea to set the log retention
-resource aws_cloudwatch_log_group log_group {
+resource "aws_cloudwatch_log_group" "log_group" {
   name              = "/aws/lambda/${aws_lambda_function.this.function_name}"
   retention_in_days = var.log_retention_days
 }
 
 # role for the lambda to run under, to do the things.
-resource aws_iam_role lambda_role {
+resource "aws_iam_role" "lambda_role" {
   name               = "lambda_${var.function_name}"
   assume_role_policy = file("${path.module}/iam_role_policy_lambda.json")
 }
 
 # Give the role access to the basic Lambda role
-resource aws_iam_role_policy_attachment lambda_basic_execution_role {
+resource "aws_iam_role_policy_attachment" "lambda_basic_execution_role" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }
 
 # build an AWS Event Bridge schedule to run every x time
-resource aws_cloudwatch_event_rule schedule_lambda_execution {
+resource "aws_cloudwatch_event_rule" "schedule_lambda_execution" {
   count               = var.lambda_run_on_schedule ? 1 : 0
   name                = "${var.function_name}_schedule"
   schedule_expression = var.lambda_schedule_expression
 }
 
 # tell Event Bridge to run our Lambda
-resource aws_cloudwatch_event_target schedule_lambda_execution {
+resource "aws_cloudwatch_event_target" "schedule_lambda_execution" {
   count = var.lambda_run_on_schedule ? 1 : 0
   rule  = aws_cloudwatch_event_rule.schedule_lambda_execution[0].name
   arn   = aws_lambda_function.this.arn
 }
 
-resource aws_lambda_permission allow_cloudwatch_to_run_lambdas {
+resource "aws_lambda_permission" "allow_cloudwatch_to_run_lambdas" {
   count         = var.lambda_run_on_schedule ? 1 : 0
   statement_id  = "AllowExecutionFromCloudWatch-${var.function_name}"
   action        = "lambda:InvokeFunction"
